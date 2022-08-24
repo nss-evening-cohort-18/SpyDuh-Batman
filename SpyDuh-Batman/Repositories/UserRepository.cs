@@ -1,11 +1,12 @@
 ﻿using SpyDuh_Batman.Models;
+using SpyDuh_Batman.Interfaces;
 
 namespace SpyDuh_Batman.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private static List<User> _userData = new List<User>()
-        { 
+        {
           new User()
         {
             Id = 1,
@@ -67,7 +68,7 @@ namespace SpyDuh_Batman.Repositories
             CodeName = "Kris",
             Friends = new List<int>()
             {
-                
+
             },
             Enemies = new List<int>()
             {
@@ -93,7 +94,7 @@ namespace SpyDuh_Batman.Repositories
 
         public List<User>? GetUsersBySkills(string skill)
         {
-             return _userData.FindAll(spy => spy.Skills.Contains(skill));
+            return _userData.FindAll(spy => spy.Skills.Contains(skill));
         }
 
         public List<User>? GetUsersByFriendship(int Id)
@@ -106,7 +107,7 @@ namespace SpyDuh_Batman.Repositories
             return _userData.FindAll(spy => spy.Enemies.Contains(Id));
         }
 
-        public void CreateUser(User user) 
+        public void CreateUser(User user)
         {
             _userData.Add(user);
         }
