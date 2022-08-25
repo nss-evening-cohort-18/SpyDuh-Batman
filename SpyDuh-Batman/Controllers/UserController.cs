@@ -31,22 +31,42 @@ namespace SpyDuh_Batman.Controllers
             return _userRepository.GetUserById(id);
         }
 
-        [HttpGet]
-        public List<User>? Get(string skill)
+        [HttpGet("/users")]
+        public List<User>? GetUsers(string skill)
         {
             return _userRepository.GetUsersBySkills(skill);
         }
 
+        [HttpGet("/friends")]
+        public List<User>? GetFriends(int id)
+        {
+            return _userRepository.GetUsersByFriendship(id);
+        }
+
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostUser(User user)
         {
+            _userRepository.CreateUser(user);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void PutSkill(int id, string skill)
         {
+            _userRepository.AddSkill(id, skill);
+        }
+
+        [HttpPut("{id}")]
+        public void PutFriend(int userId, int friendId)
+        {
+            _userRepository.AddFriend(userId, friendId);
+        }
+
+        [HttpPut("{id}")]
+        public void PutEnemy(int userId, string enemyId)
+        {
+            _userRepository.AddEnemy(userId, enemyId);
         }
     }
 }
