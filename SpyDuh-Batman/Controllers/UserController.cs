@@ -68,5 +68,10 @@ namespace SpyDuh_Batman.Controllers
         {
             _userRepository.AddEnemy(userId, enemyId);
         }
+        [HttpDelete("/user/skill")]
+        public void DeleteSkill(int id, string skill)
+        {
+            _userRepository.DeleteSkill(id, skill);
+        }
     }
 }
