@@ -51,20 +51,20 @@ namespace SpyDuh_Batman.Controllers
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}")]
+        [HttpPut("/user/skill")]
         public void PutSkill(int id, string skill)
         {
             _userRepository.AddSkill(id, skill);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("/user/friend")]
         public void PutFriend(int userId, int friendId)
         {
             _userRepository.AddFriend(userId, friendId);
         }
 
-        [HttpPut("{id}")]
-        public void PutEnemy(int userId, string enemyId)
+        [HttpPut("/user/enemy")]
+        public void PutEnemy(int userId, int enemyId)
         {
             _userRepository.AddEnemy(userId, enemyId);
         }

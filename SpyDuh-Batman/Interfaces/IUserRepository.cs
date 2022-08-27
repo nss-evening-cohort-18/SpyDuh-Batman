@@ -11,5 +11,8 @@ namespace SpyDuh_Batman.Interfaces
         List<User>? GetUsersByFriendship(int Id);
         List<User>? GetUsersByEnemies(int Id);
         public void CreateUser(User user);
+        public void AddSkill(int id, string skill);
+        public void AddFriend(int userId, int friendId);
+        public void AddEnemy(int userId, int enemyId);
     }
 }
