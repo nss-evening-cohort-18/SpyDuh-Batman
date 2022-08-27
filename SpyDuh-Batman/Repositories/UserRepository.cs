@@ -111,5 +111,23 @@ namespace SpyDuh_Batman.Repositories
         {
             _userData.Add(user);
         }
+
+        public void AddSkill(int id, string skill)
+        {
+            var skillToAdd = _userData.FirstOrDefault(f => f.Id == id);
+            skillToAdd.Skills.Add(skill);
+        }
+
+        public void AddFriend(int id, int friendId)
+        {
+            var friendToAdd = _userData.FirstOrDefault(f => f.Id == id);
+            friendToAdd.Friends.Add(friendId);
+        }
+
+        public void AddEnemy(int id, int enemyId)
+        {
+            var enemyToAdd = _userData.FirstOrDefault(f => f.Id == id);
+            enemyToAdd.Enemies.Add(enemyId);
+        }
     }
 }
