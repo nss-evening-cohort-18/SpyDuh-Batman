@@ -10,7 +10,7 @@
 
         public List<int> Enemies { get; set; }
 
-        public List<string> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
         public bool HasSideKick { get; set; }
 

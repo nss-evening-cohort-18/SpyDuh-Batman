@@ -1,5 +1,6 @@
 ﻿using SpyDuh_Batman.Models;
 using SpyDuh_Batman.Interfaces;
+using System.Linq;
 
 namespace SpyDuh_Batman.Repositories
 {
@@ -19,9 +20,23 @@ namespace SpyDuh_Batman.Repositories
             {
                 4
             },
-            Skills = new List<string>()
+            Skills = new List<Skill>()
             {
-                "guns", "explosions", "C#"
+                new Skill(1)
+                {
+                    Name = "explosions",
+                    isExpert = true
+                },
+                new Skill(2)
+                {
+                    Name = "guns",
+                    isExpert = false
+                },
+                new Skill(3)
+                {
+                    Name = "C#",
+                    isExpert = false
+                }
             },
             HasSideKick = true
         },
@@ -37,9 +52,9 @@ namespace SpyDuh_Batman.Repositories
             {
                 4
             },
-            Skills = new List<string>()
+            Skills = new List<Skill>()
             {
-                "knives", "cooking", "JavaScript"
+                
             },
             HasSideKick = false
         },
@@ -55,9 +70,9 @@ namespace SpyDuh_Batman.Repositories
             {
                 4
             },
-            Skills = new List<string>()
+            Skills = new List<Skill>()
             {
-                "Ice", "Singing", "Python"
+               
             },
             HasSideKick = true
 
@@ -74,9 +89,9 @@ namespace SpyDuh_Batman.Repositories
             {
                 1,2,3
             },
-            Skills = new List<string>()
+            Skills = new List<Skill>()
             {
-                "guns", "knives", "Python"
+                
             },
             HasSideKick = false
         }
@@ -94,7 +109,19 @@ namespace SpyDuh_Batman.Repositories
 
         public List<User>? GetUsersBySkills(string skill)
         {
-            return _userData.FindAll(spy => spy.Skills.Contains(skill));
+            //return _userData.FindAll(spy => spy.Skills.FirstOrDefault(userSkill => userSkill.Name == skill));
+            List<User> spysWhithSkill = new();
+            foreach (User spy in _userData)
+            {
+                for (int i = 0; i < spy.Skills.Count; i++)
+                {
+                    if (spy.Skills[i].Name == skill)
+                    {
+                        spysWhithSkill.Add(spy);
+                    }
+                }
+            }
+            return spysWhithSkill;
         }
 
         public List<User>? GetUsersByFriendship(int Id)
@@ -111,8 +138,7 @@ namespace SpyDuh_Batman.Repositories
         {
             _userData.Add(user);
         }
-
-        public void AddSkill(int id, string skill)
+        public void AddSkill(int id, Skill skill)
         {
             var skillToAdd = _userData.FirstOrDefault(f => f.Id == id);
             skillToAdd.Skills.Add(skill);
@@ -128,6 +154,12 @@ namespace SpyDuh_Batman.Repositories
         {
             var enemyToAdd = _userData.FirstOrDefault(f => f.Id == id);
             enemyToAdd.Enemies.Add(enemyId);
+        }
+
+        public void DeleteSkill(int id, Skill skill)
+        {
+            var skillToDelete = _userData.FirstOrDefault(user => user.Id == id);
+            skillToDelete.Skills.Remove(skill);
         }
     }
 }
