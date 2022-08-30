@@ -69,9 +69,9 @@ namespace SpyDuh_Batman.Controllers
             _userRepository.AddEnemy(userId, enemyId);
         }
         [HttpDelete("/skill")]
-        public void DeleteSkill(int id, Skill skill)
+        public void DeleteSkill(int id, int skillId)
         {
-            _userRepository.DeleteSkill(id, skill);
+            _userRepository.DeleteSkill(id, skillId);
         }
     }
 }

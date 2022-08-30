@@ -156,10 +156,11 @@ namespace SpyDuh_Batman.Repositories
             enemyToAdd.Enemies.Add(enemyId);
         }
 
-        public void DeleteSkill(int id, Skill skill)
+        public void DeleteSkill(int id, int skillId)
         {
-            var skillToDelete = _userData.FirstOrDefault(user => user.Id == id);
-            skillToDelete.Skills.Remove(skill);
+            var currentUser = _userData.FirstOrDefault(user => user.Id == id);
+            Skill skillToRemove = currentUser.Skills.FirstOrDefault(skill => skill.Id == skillId);
+            currentUser.Skills.Remove(skillToRemove);
         }
     }
 }
